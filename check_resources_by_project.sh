@@ -6,6 +6,12 @@ if [[ -z "$PRJ" ]]; then
   exit 1
 fi
 
+PRJ_ID=$(openstack project show "$PRJ" -c ID -f value)
+if [[ $"PRJ"== $"PRJ_ID" ]]; then
+  echo "Glance Image list:"
+  glance image-list --owner $"PRJ_ID"
+fi 
+ 
 function show_prj_object () {
   OBJ=$(openstack $1 list --project "$PRJ" -f yaml)
   if [ $? -eq 1 ]; then
@@ -15,7 +21,7 @@ function show_prj_object () {
   [[ -z "$OBJ" ]]&&echo "0"||echo $OBJ
 }
 
-### "User list"
+## "User list"
 show_prj_object "user" "User"
 
 ## "Volume list"
