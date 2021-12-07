@@ -15,7 +15,7 @@ function show_prj_object () {
   [[ -z "$OBJ" ]]&&echo "0"||echo $OBJ
 }
 
-## #User list"
+## "User list"
 show_prj_object "user" "User"
 
 ## "Volume list"
@@ -32,6 +32,9 @@ show_prj_object "subnet" "Subnet"
 
 ## "Router list"
 show_prj_object "router" "Router"
+
+## "FLoating IP list"
+show_prj_object "floating ip" "Floating IP"
 
 ## "Security Group list"
 show_prj_object "security group" "Security Group"
