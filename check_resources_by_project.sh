@@ -6,12 +6,18 @@ if [[ -z "$PRJ" ]]; then
   exit 1
 fi
 
-PRJ_ID=$(openstack project show "$PRJ" -c ID -f value)
-if [[ $"PRJ"== $"PRJ_ID" ]]; then
-  echo "Glance Image list:"
-  glance image-list --owner $"PRJ_ID"
-fi 
- 
+PRJ_ID=$(openstack project show "$PRJ" -c id -f value)
+
+## "Image list"
+if [[ -z "$PRJ_ID" ]]; then
+  echo "Please source keystonercv3 file"
+  exit 1
+else
+  echo "Glance Image list for "$PRJ_ID":"
+  glance image-list --owner "$PRJ_ID"
+fi
+
+## Wrapper for openstack client 
 function show_prj_object () {
   OBJ=$(openstack $1 list --project "$PRJ" -f yaml)
   if [ $? -eq 1 ]; then
