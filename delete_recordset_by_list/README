@@ -1,0 +1,13 @@
+
+Pease use it if you need to get rid of the orphan recordsets in designate
+
+The file list description:
+- reclist.py   - python script which gather the orphan A/PTR recordsets and output it in json  
+- json2line.py - converter the output of reclist.py json to the input list with strings of check_rec.sh
+- check_rec.sh - bash script which delete the orphan recordsets from the designate. It has 2 input arguments <reord_list> and <type record>
+ example of command: 
+  ./check_rec.sh list_ptr.txt ptr - if type of the recordset is PTR
+  ./check_rec.sh list_a.txt a - if type of the recordset is A  
+ NOTE: check_rec.sh uses openstack client as a basic commands and require sourcing of the keystonercv3 file
+- list.txt - example of a list with PTR recordsets
+- list.json -  example of the json output from reclist.py. It's used for json2line.py converter as well.  
